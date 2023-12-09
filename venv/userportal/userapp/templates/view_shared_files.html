@@ -1,0 +1,8 @@
+<!-- view_shared_file.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ shared_file.file.file.name }}</h2>
+    <p>Shared by: {{ shared_file.user_shared_from.username }}</p>
+    <pre>{{ shared_file.file.read|linebreaksbr }}</pre>
+{% endblock %}

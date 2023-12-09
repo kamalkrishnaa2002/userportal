@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h2>Login</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <!-- Add a button to redirect to the register page -->
+        <p class="mt-3">
+            Don't have an account? 
+            <a href="{% url 'register' %}" class="btn btn-primary">Register here</a>
+         
+        </p>
+    </div>
+{% endblock %}

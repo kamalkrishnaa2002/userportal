@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Uploaded Files{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h2>Uploaded Files</h2>
+        {% for file in files %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ file.file.url }}" target="_blank">{{ file.file.name }}</a>
+                    </h5>
+                    <p class="card-text">
+                        Uploaded on {{ file.uploaded_at }}
+                        <a href="{{ file.file.url }}" download class="btn btn-primary btn-sm ml-2">Download</a>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h2 class="mb-4">Register</h2>
+
+        <table class="table table-borderless custom-table">
+            <tbody>
+                <tr>
+                    <td class="label-column">
+                        <label for="id_username">Username:</label>
+                    </td>
+                    <td>
+                        {{ form.username }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label for="id_email">Email:</label>
+                    </td>
+                    <td>
+                        {{ form.email }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label for="id_password1">Password:</label>
+                    </td>
+                    <td>
+                        {{ form.password1 }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label for="id_password2">Confirm Password:</label>
+                    </td>
+                    <td>
+                        {{ form.password2 }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+
+        </form>
+
+        <p class="mt-3">
+            Already have an account? 
+            <a href="{% url 'login' %}" class="btn btn-primary">Login here</a>
+        </p>
+        
+
+        {% if form.errors %}
+            <div class="alert alert-danger mt-3">
+                <p>Error(s) in the form:</p>
+                {{ form.errors }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

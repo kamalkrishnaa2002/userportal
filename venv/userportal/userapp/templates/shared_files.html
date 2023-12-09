@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Shared Files{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h2>Shared Files</h2>
+        {% if shared_files %}
+            {% for shared_file in shared_files %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ shared_file.file.file.url }}" target="_blank">{{ shared_file.file.file.name }}</a>
+                        </h5>
+                        <p class="card-text">
+                            Shared by {{ shared_file.user_shared_from.username }}
+                            (Shared on {{ shared_file.shared_at }})
+                            <a href="{% url 'download_shared_file' shared_file.id %}" download class="btn btn-primary btn-sm ml-2">Download</a>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No shared files available.</p>
+        {% endif %}
+    </div>
+{% endblock %}

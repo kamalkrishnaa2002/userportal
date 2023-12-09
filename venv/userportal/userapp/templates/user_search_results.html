@@ -1,0 +1,11 @@
+<!-- user_search_results.html -->
+<ul class="list-unstyled">
+  {% for user in users %}
+      <li class="d-flex align-items-center mb-3">
+          <a href="{% url 'share_files_page' user.id %}" class="btn btn-link mr-2">
+              {{ user.username }}
+          </a>
+          <a href="{% url 'share_files_page' user.id %}" class="btn btn-sm btn-primary">Share Files</a>
+      </li>
+  {% endfor %}
+</ul>

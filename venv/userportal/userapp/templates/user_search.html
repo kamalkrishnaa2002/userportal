@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}User Search{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <!-- Include Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-HJ3e2f3F2fA4e9/YzpsG5dF6wz3AqY8UpbAUVaXxFI+0VAVaS7fHzMHpd9K67hKM" crossorigin="anonymous">
+
+        <!-- User Search Form -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <form method="post" action="{% url 'user_search' %}" id="userSearchForm">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                {{ form.query }}
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="fas fa-search" id="search-icon"></i>
+                    </span>
+                </div>
+            </div>
+        </form>
+
+        <!-- User Search Results -->
+        <div id="searchResults">
+            {% if users %}
+                <ul>
+                    {% for user in users %}
+                        <li>
+                            <a href="{% url 'share_files_page' user.id %}">{{ user.username }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p id="noResults">No users found.</p>
+            {% endif %}
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#id_query').on('input', function () {
+                    var query = $(this).val();
+                    if (query.trim() === '') {
+                        $('#searchResults').hide();
+                    } else {
+                        $('#searchResults').show();
+                        $.ajax({
+                            type: 'POST',
+                            url: '{% url "user_search" %}',
+                            data: $('#userSearchForm').serialize(),
+                            success: function (data) {
+                                $('#searchResults').html(data);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </div>
+{% endblock %}

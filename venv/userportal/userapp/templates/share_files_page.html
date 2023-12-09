@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Share Files{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <form method="post" action="{% url 'share_files' %}">
+            {% csrf_token %}
+            <h2>Choose files to share with {{ selected_user.username }}</h2>
+            <ul>
+                {% for file in user_uploaded_files %}
+                    <li>
+                        <input type="checkbox" name="selected_files[]" value="{{ file.id }}">
+                        {{ file.file.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <input type="hidden" name="selected_user" value="{{ selected_user.id }}">
+            <input type="submit" value="Share Selected Files" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}
